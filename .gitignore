@@ -10,7 +10,7 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
-*.local
+# *.local
 
 # Editor directories and files
 .vscode/*
@@ -23,9 +23,9 @@ dist-ssr
 *.sln
 *.sw?
 
-# Android signing keys - DO NOT COMMIT
-*.keystore
-*.jks
-key.properties
-android/key.properties
-nutriflow-release-key.keystore
+# Android signing keys (private repo - included)
+# *.keystore
+# *.jks
+# key.properties
+# android/key.properties
+# nutriflow-release-key.keystore
