@@ -336,6 +336,7 @@ const AppContent: React.FC = () => {
         }
       }
 
+      setIsLoading(true);
       setCurrentUserId(userId);
       setOnboardingParams(null);
       storageService.saveLastUserId(userId);
@@ -377,13 +378,11 @@ const AppContent: React.FC = () => {
 
   const handleLogout = () => {
     if (confirm("Sign out? Your data will be safely stored.")) {
-      setState(prev => ({
-        ...prev,
-        isAuthenticated: false
-      }));
+      setState(DEFAULT_STATE);
       setCurrentUserId(null);
       // Clear saved session for persistent login
       storageService.clearLastUserId();
+      lastSavedState.current = "";
     }
   };
 
@@ -483,7 +482,7 @@ const AppContent: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#fcfcfd] flex flex-col md:flex-row">
       <OfflineIndicator />
-      <main className="flex-1 p-4 md:p-10 max-w-6xl mx-auto w-full pb-32 overflow-y-auto">
+      <main className="flex-1 p-4 pt-14 md:p-10 md:pt-16 max-w-6xl mx-auto w-full pb-32 overflow-y-auto" style={{ paddingTop: `max(3.5rem, env(safe-area-inset-top, 0px))` }}>
         {activeTab === 'dashboard' && (
           <Dashboard
             state={state}

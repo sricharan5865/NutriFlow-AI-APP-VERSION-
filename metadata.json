@@ -1,7 +1,0 @@
-{
-  "name": "NutriFlow AI",
-  "description": "A comprehensive diet and nutrition tracker with AI-powered meal analysis, progress monitoring, and a personal health assistant named Ria.",
-  "requestFramePermissions": [
-    "camera"
-  ]
-}

@@ -54,12 +54,24 @@ const MealLog: React.FC<MealLogProps> = ({ onAddMeal, editInitialData }) => {
     }
   }, [editInitialData]);
 
-  // Dynamic Scaling Effect
+  // Advanced Dynamic Scaling Effect
   useEffect(() => {
     if (baseNutrition && quantity) {
-      const currentQtyMatch = quantity.match(/^([\d.]+)/);
+      // Find the first occurrence of a number, decimal, or fraction (e.g. "1.5", "1/2", "3")
+      const currentQtyMatch = quantity.match(/^([\d./]+)/);
       if (currentQtyMatch) {
-        const currentQty = parseFloat(currentQtyMatch[1]);
+        let currentQty = NaN;
+        const numStr = currentQtyMatch[1];
+
+        if (numStr.includes('/')) {
+          const parts = numStr.split('/');
+          if (parts.length === 2 && parts[1] !== '0') {
+            currentQty = parseFloat(parts[0]) / parseFloat(parts[1]);
+          }
+        } else {
+          currentQty = parseFloat(numStr);
+        }
+
         if (!isNaN(currentQty) && baseQuantityVal > 0) {
           const ratio = currentQty / baseQuantityVal;
           setNutrition({
